@@ -29,7 +29,10 @@ function pixelText(value: string, x: number, y: number, fontSize: number, color:
   return text
 }
 
-/** Owns PixiJS and connects scene layers, the character controller and timeline. */
+/**
+ * PixiJS 场景容器，负责组织“背景层 / 角色层 / 特效层 / 前景气泡”四层。
+ * 它是 Vue 和 Pixi 的桥接点：组件只负责状态更新，真正的渲染和时间轴逻辑都在这里。
+ */
 export class PixelScene {
   private app: Application | null = null
   private host: HTMLElement | null = null
@@ -187,6 +190,8 @@ export class PixelScene {
     const previous = this.playheadMs
 
     if (this.isPlaying) {
+      // 这部分是播放状态的核心：用 ticker 的 deltaMS 更新 playhead，
+      // 然后在时间轴上查找该时刻应该切换到哪个 cue，并触发相应特效。
       const nextRaw = previous + Math.min(deltaMs, 100)
       const next = nextRaw >= DURATION ? nextRaw % DURATION : nextRaw
       if (next < previous) {

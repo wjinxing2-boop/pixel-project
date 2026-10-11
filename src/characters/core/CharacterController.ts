@@ -4,8 +4,8 @@ import { RigCharacterRenderer } from '../rig/RigCharacterRenderer'
 import { SpriteCharacterRenderer } from '../sprite/SpriteCharacterRenderer'
 
 /**
- * Public façade for one character. Scene/timeline code talks to this controller only;
- * it does not know whether a pose is rendered by independent rig parts or by a PNG clip.
+ * 对外的角色门面类：场景/时间轴代码只和它打交道，不直接操作 Rig 或 Sprite 渲染器。
+ * 这样一来，项目既能切换代码绘制角色，也能接入 PNG 图集动画，而不影响上层逻辑。
  */
 export class CharacterController {
   readonly root = new Container()

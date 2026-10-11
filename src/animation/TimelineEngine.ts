@@ -13,10 +13,13 @@ export class TimelineEngine {
     this.durationMs = durationMs
   }
 
+  // 把任意毫秒值限制在项目时长区间内，避免播放头跑出范围。
   normalizeTime(timeMs: number): number {
     return Math.min(this.durationMs, Math.max(0, timeMs))
   }
 
+  // 关键逻辑：把“绝对时间”翻译成当前应该应用哪个 cue。
+  // 例如在 2200ms 时，状态应落到 shock 那一条，而不是按帧计时器自己去更新。
   stateAt(timeMs: number): TimelineState {
     const t = this.normalizeTime(timeMs)
     let index = 0

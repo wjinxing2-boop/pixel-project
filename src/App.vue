@@ -6,6 +6,9 @@ import TimelinePanel from '@/components/panels/TimelinePanel.vue'
 import PixiStage from '@/components/stage/PixiStage.vue'
 import { useEditorStore } from '@/stores/editor'
 
+// 这个文件相当于“编辑器总布局”。
+// 它不处理角色动画细节，而是把当前选择的角色、表情、背景、时间轴等状态
+// 统一传给 PixiStage 和各个面板组件，让 UI 和渲染层分离。
 const store = useEditorStore()
 </script>
 

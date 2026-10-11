@@ -43,6 +43,8 @@ export class SpriteCharacterRenderer {
       console.warn(`[SpriteCharacterRenderer] Could not load ${characterId}/${action}; using rig fallback.`, error)
       return false
     }
+    // 只有当这次切换仍然有效时，才替换当前图片动画；
+    // 这样可以避免异步加载期间因切换角色/动作导致旧图层覆盖新状态。
     if (token !== this.loadToken) return false
 
     const key = `${characterId}:${action}`

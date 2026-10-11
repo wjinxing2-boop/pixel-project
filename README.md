@@ -2,6 +2,18 @@
 
 基于 **Vue 3 + TypeScript + Vite + PixiJS 8 + Pinia** 的像素角色动画创作工作台。工程围绕“程序化角色部件 + PNG 精灵动画 + 统一时间轴”设计，而不是把全部动画逻辑堆进一个 Vue 组件。
 
+## 新手阅读指南
+
+如果你第一次打开这个项目，建议按下面顺序阅读：
+
+1. 先看 [src/main.ts](src/main.ts) 和 [src/App.vue](src/App.vue)：知道应用如何启动、怎么布局。
+2. 然后看 [src/stores/editor.ts](src/stores/editor.ts)：理解编辑器状态是如何驱动 UI 的。
+3. 再看 [src/engine/PixelScene.ts](src/engine/PixelScene.ts)：这是 Pixi 场景和时间轴的核心。
+4. 接着看 [src/characters/core/CharacterController.ts](src/characters/core/CharacterController.ts)：角色的统一出口。
+5. 最后结合 [src/animation/TimelineEngine.ts](src/animation/TimelineEngine.ts) 和 [src/characters/rig/RigCharacterRenderer.ts](src/characters/rig/RigCharacterRenderer.ts)，理解“时间轴 → 动作切换 → 姿态渲染”的完整链路。
+
+这套项目的核心思路是：UI 只负责选择和状态更新，真正的动画逻辑隐藏在场景、角色控制器和时间轴对象中。
+
 ## 已实现的功能
 
 - Vue 编辑器：角色素材库、动作选择、表情选择、背景选择、快速特效、时间轴预览。
@@ -137,6 +149,12 @@ JSON 使用 PixiJS 可读取的 atlas 结构，`animations.collapse` 指向 PNG 
 3. 给 `AnimationClip.ts` 加入真正的多轨关键帧播放器（当前提供类型和插值工具，动作姿势仍在 Rig 渲染器中定义）。
 4. 将 `DEMO_TIMELINE` 抽象为可编辑 Project 文件，增加项目 JSON 的保存/加载。
 5. 最后接配音、字幕轨道、音画同步与视频编码。建议在基础时间轴确定后再处理 MP4 导出。
+
+## 开发者文档
+
+- [docs/BEGINNER_GUIDE.md](docs/BEGINNER_GUIDE.md)：新手入门与阅读路径
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)：架构与渲染栈说明
+- [docs/DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md)：扩展开发、模块职责和工程约定
 
 ## 官方参考
 

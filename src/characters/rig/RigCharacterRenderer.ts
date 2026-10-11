@@ -82,7 +82,10 @@ export class RigCharacterRenderer {
     this.drawExpression()
   }
 
-  /** Apply a deterministic pose using elapsed milliseconds within the current action. */
+  /**
+   * 根据当前动作在本动作内已流逝的时间，计算一个稳定的姿态。
+   * 例如走路动作通过正弦函数控制左右腿和手臂，最终得到自然的节奏感。
+   */
   seek(actionElapsedMs: number) {
     const t = Math.max(0, actionElapsedMs)
     const wave = Math.sin(t / 90)

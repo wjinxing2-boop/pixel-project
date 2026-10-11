@@ -1,5 +1,20 @@
 # 架构说明
 
+## 适合新手的阅读顺序
+
+如果你是第一次读这个项目，建议按以下顺序建立认知：
+
+1. `src/main.ts`：应用启动入口。
+2. `src/App.vue`：编辑器总布局，确定主界面结构。
+3. `src/stores/editor.ts`：Pinia 状态管理，掌握 UI 和渲染之间的状态来源。
+4. `src/components/stage/PixiStage.vue`：Vue 和 PixiJS 的协调边界。
+5. `src/engine/PixelScene.ts`：核心场景，控制背景、角色层、特效层、播放时钟。
+6. `src/characters/core/CharacterController.ts`：统一角色接口，决定用 Rig 还是 Sprite。
+7. `src/animation/TimelineEngine.ts`：把时间转换成动作和表情。
+8. `src/characters/rig/RigCharacterRenderer.ts`：真正决定人物姿态的地方。
+
+这样你就能理解从“用户操作”到“舞台画面”之间的完整链路。
+
 ## 渲染栈
 
 ```text
